@@ -1,0 +1,37 @@
+{% sw_extends '@Storefront/storefront/page/checkout/cart/index.html.twig' %}
+
+{% block page_checkout_cart_header %}
+    {% block page_checkout_cart_header_checkout_improver_progress_before %}{% endblock %}
+
+    {{ parent() }}
+
+    {% block page_checkout_cart_header_checkout_improver_progress_custom %}
+        {% if config('ShopwareCheckoutImprover.config.showProgressBarInCart') %}
+            {% sw_include '@ShopwareCheckoutImprover/storefront/custom/progress-bar-free-shipping.html.twig'
+                with {
+                    additionalClass: ' mt-3'
+                }
+            %}
+        {% endif %}
+    {% endblock %}
+{% endblock %}
+
+{% block page_checkout_cart_add_product %}
+    {% block page_checkout_cart_add_product_checkout_improver_before %}{% endblock %}
+
+    {% if config('ShopwareCheckoutImprover.config.showProductNumberInCart') %}
+        {{ parent() }}
+    {% endif %}
+
+    {% block page_checkout_cart_add_product_checkout_improver_after %}{% endblock %}
+{% endblock %}
+
+{% block page_checkout_cart_add_promotion %}
+    {% block page_checkout_cart_add_promotion_checkout_improver_before %}{% endblock %}
+
+    {% if config('ShopwareCheckoutImprover.config.showVoucherInCart') %}
+        {{ parent() }}
+    {% endif %}
+
+    {% block page_checkout_cart_add_promotion_checkout_improver_after %}{% endblock %}
+{% endblock %}

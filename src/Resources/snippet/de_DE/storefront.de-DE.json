@@ -1,0 +1,11 @@
+{
+  "checkout": {
+    "improver": {
+      "freeShipping": {
+        "headline": "Fortschrittsbalken für kostenlosen Versand",
+        "textUntilIsReached": "Nur noch <strong class=\"checkout-improver-text-amount\">%priceDifference%</strong> bis zum kostenlosen Versand!",
+        "isReached": "🎉 Herzlichen Glückwunsch! Du erhältst kostenlosen Versand."
+      }
+    }
+  }
+}

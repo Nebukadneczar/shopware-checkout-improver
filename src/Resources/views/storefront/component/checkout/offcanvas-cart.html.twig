@@ -1,0 +1,27 @@
+{% sw_extends '@Storefront/storefront/component/checkout/offcanvas-cart.html.twig' %}
+
+{% block component_offcanvas_cart_header %}
+    {% block component_offcanvas_cart_header_checkout_improver_progress_before %}{% endblock %}
+
+    {{ parent() }}
+
+    {% block component_offcanvas_cart_header_checkout_improver_progress_custom %}
+        {% if config('ShopwareCheckoutImprover.config.showProgressBarInOffCanvasCart') %}
+            {% sw_include '@ShopwareCheckoutImprover/storefront/custom/progress-bar-free-shipping.html.twig'
+                with {
+                    additionalClass: ''
+                }
+            %}
+        {% endif %}
+    {% endblock %}
+{% endblock %}
+
+{% block component_offcanvas_cart_actions_promotion %}
+    {% block component_offcanvas_cart_actions_promotion_checkout_improver_before %}{% endblock %}
+
+    {% if config('ShopwareCheckoutImprover.config.showVoucherInOffCanvasCart') %}
+        {{ parent() }}
+    {% endif %}
+
+    {% block component_offcanvas_cart_actions_promotion_checkout_improver_after %}{% endblock %}
+{% endblock %}

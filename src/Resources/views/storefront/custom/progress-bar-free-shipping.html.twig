@@ -1,0 +1,94 @@
+{#
+    Modern Free Shipping Progress Bar
+    Calculates the remaining amount until free shipping is reached
+    and displays a smooth, animated progress indicator.
+#}
+{% set DISCOUNT_LINE_ITEM_TYPE = constant('Shopware\\Core\\Checkout\\Cart\\LineItem\\LineItem::DISCOUNT_LINE_ITEM') %}
+{% set cartContainsProductsThatNotShippingFree = false %}
+{% set totalPriceOfAllFreeShippingProducts = 0 %}
+{% set totalPriceOfAllDiscounts = 0 %}
+
+{% for lineItem in page.cart.lineItems %}
+    {% set isDiscount = (not lineItem.good and lineItem.price.totalPrice <= 0) or lineItem.type == DISCOUNT_LINE_ITEM_TYPE %}
+
+    {% if isDiscount %}
+        {% set totalPriceOfAllDiscounts = totalPriceOfAllDiscounts + lineItem.price.totalPrice %}
+    {% else %}
+        {% if not(lineItem.deliveryInformation.freeDelivery) %}
+            {% set cartContainsProductsThatNotShippingFree = true %}
+        {% else %}
+            {% set totalPriceOfAllFreeShippingProducts = totalPriceOfAllFreeShippingProducts + lineItem.price.totalPrice %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+{% set delivery = page.cart.deliveries.first %}
+
+{% if (delivery is defined) and (delivery.shippingMethod is defined) and (delivery.shippingMethod.prices|length > 0) and (cartContainsProductsThatNotShippingFree) %}
+    {% set shippingMethodPriceMatrixLast = delivery.shippingMethod.prices.last %}
+    {% set shippingMethodPriceMatrixLastStart = shippingMethodPriceMatrixLast.quantityStart %}
+    {% set currentPriceWithoutShippingCosts = ((page.cart.price.positionPrice - totalPriceOfAllFreeShippingProducts)) - (totalPriceOfAllDiscounts) %}
+
+    {% if shippingMethodPriceMatrixLastStart > 0 and currentPriceWithoutShippingCosts >= 0 %}
+        {% set priceDifferenceUntilFreeShipping = shippingMethodPriceMatrixLastStart - currentPriceWithoutShippingCosts %}
+        {% set currentProgressBarValue = ((currentPriceWithoutShippingCosts / shippingMethodPriceMatrixLastStart) * 100) %}
+        {% set currentProgressBarValue = ((currentProgressBarValue > 100) ? 100 : ((currentProgressBarValue < 0) ? 0 : currentProgressBarValue)) %}
+
+        {% set showIcon = config('ShopwareCheckoutImprover.config.progressBarIcon') %}
+        {% set showAnimation = config('ShopwareCheckoutImprover.config.showProgressBarAnimation') %}
+        {% set showSuccess = config('ShopwareCheckoutImprover.config.showSuccessMessage') %}
+
+        {% if (showSuccess or (not showSuccess and priceDifferenceUntilFreeShipping > 0)) %}
+            <div
+                class="checkout-improver-progress text-center mt-2{{ additionalClass }}"
+                aria-labelledby="checkout-improver-progress-header">
+
+                {# Hidden accessible headline #}
+                <label class="visually-hidden" id="checkout-improver-progress-header">
+                    {{ 'checkout.improver.freeShipping.headline'|trans|sw_sanitize }}
+                </label>
+
+                {% if priceDifferenceUntilFreeShipping > 0 %}
+                    {# Text + Icon row #}
+                    <div class="d-flex justify-content-center align-items-center mb-2">
+                        {% if showIcon and showIcon != 'none' %}
+                            <span class="checkout-improver-progress-icon">
+                                {% sw_icon showIcon %}
+                            </span>
+                        {% endif %}
+                        <p class="checkout-improver-progress-text mb-0">
+                            {{ 'checkout.improver.freeShipping.textUntilIsReached'|trans({"%priceDifference%": priceDifferenceUntilFreeShipping|currency})|raw|sw_sanitize }}
+                        </p>
+                    </div>
+
+                    {# Progress bar with price labels #}
+                    <div class="checkout-improver-progress-range">
+                        <span class="checkout-improver-range-label">
+                            {{ currentPriceWithoutShippingCosts|currency }}
+                        </span>
+
+                        <div class="progress" role="progressbar"
+                             aria-valuenow="{{ currentProgressBarValue|round }}"
+                             aria-valuemin="0"
+                             aria-valuemax="100">
+                            <div
+                                class="progress-bar{% if showAnimation %} progress-bar-striped progress-bar-animated{% endif %}"
+                                style="width: {{ currentProgressBarValue|round }}%"></div>
+                        </div>
+
+                        <span class="checkout-improver-range-label checkout-improver-range-label--end">
+                            {{ shippingMethodPriceMatrixLastStart|currency }}
+                        </span>
+                    </div>
+                {% else %}
+                    {# Success state #}
+                    {% if showSuccess %}
+                        <div class="checkout-improver-progress-success">
+                            {{ 'checkout.improver.freeShipping.isReached'|trans|raw|sw_sanitize }}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endif %}
+    {% endif %}
+{% endif %}

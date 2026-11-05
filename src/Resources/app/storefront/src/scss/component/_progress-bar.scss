@@ -1,0 +1,140 @@
+$checkout-improver-progress-bg: #f0f0f0 !default;
+$checkout-improver-progress-fill: #10b981 !default;
+$checkout-improver-progress-success: #059669 !default;
+$checkout-improver-progress-radius: 8px !default;
+
+.checkout-improver-progress {
+  padding: 1rem 0;
+
+  &-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    margin-right: 0.5rem;
+    color: $checkout-improver-progress-fill;
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+  }
+
+  &-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0;
+
+    .checkout-improver-text-amount {
+      color: $checkout-improver-progress-fill;
+      font-weight: 700;
+    }
+  }
+
+  &-range {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+
+    .progress {
+      flex-grow: 1;
+      height: 10px;
+      background-color: $checkout-improver-progress-bg;
+      border-radius: $checkout-improver-progress-radius;
+      overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+
+      .progress-bar {
+        background-color: $checkout-improver-progress-fill;
+        border-radius: $checkout-improver-progress-radius;
+        transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+        position: relative;
+        overflow: hidden;
+
+        // Animated stripes
+        &.progress-bar-striped {
+          background-image: linear-gradient(
+            45deg,
+            rgba(255, 255, 255, 0.15) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(255, 255, 255, 0.15) 50%,
+            rgba(255, 255, 255, 0.15) 75%,
+            transparent 75%,
+            transparent
+          );
+          background-size: 1rem 1rem;
+        }
+
+        &.progress-bar-animated {
+          animation: checkout-improver-progress-bar-stripes 1s linear infinite;
+        }
+
+        // Glow effect at high progress
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2));
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+      }
+    }
+
+    .checkout-improver-range-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #6b7280;
+      white-space: nowrap;
+      min-width: 60px;
+
+      &--end {
+        text-align: right;
+        color: $checkout-improver-progress-fill;
+      }
+    }
+  }
+
+  &-success {
+    margin-top: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+    border: 1px solid #a7f3d0;
+    border-radius: $checkout-improver-progress-radius;
+    color: #065f46;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    animation: checkout-improver-fade-in 0.4s ease;
+  }
+}
+
+@keyframes checkout-improver-progress-bar-stripes {
+  0% {
+    background-position: 1rem 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+@keyframes checkout-improver-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

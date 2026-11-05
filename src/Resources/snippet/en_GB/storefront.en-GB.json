@@ -1,0 +1,11 @@
+{
+  "checkout": {
+    "improver": {
+      "freeShipping": {
+        "headline": "Free shipping progress bar",
+        "textUntilIsReached": "Only <strong class=\"checkout-improver-text-amount\">%priceDifference%</strong> more to get free shipping!",
+        "isReached": "🎉 Congratulations! You get free shipping."
+      }
+    }
+  }
+}

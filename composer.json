@@ -1,0 +1,37 @@
+{
+    "name": "markus/shopwarecheckoutimprover",
+    "description": "Modern checkout improvements for Shopware 6 – free shipping progress bar, voucher & product number visibility controls",
+    "version": "2.0.0",
+    "type": "shopware-platform-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Markus",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "shopware/core": "^6.6.0",
+        "shopware/storefront": "^6.6.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "ShopwareCheckoutImprover\\ShopwareCheckoutImprover",
+        "label": {
+            "de-DE": "Checkout Verbesserungen",
+            "en-GB": "Checkout Improvements"
+        },
+        "description": {
+            "de-DE": "Modernisiert den Checkout mit einem animierten Fortschrittsbalken für kostenlosen Versand, konfigurierbaren Gutschein- und Artikelnummern-Feldern sowie modernen Design-Optionen.",
+            "en-GB": "Modernizes the checkout with an animated free shipping progress bar, configurable voucher & product number fields, and modern design options."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://example.com",
+            "en-GB": "https://example.com"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "ShopwareCheckoutImprover\\": "src/"
+        }
+    }
+}

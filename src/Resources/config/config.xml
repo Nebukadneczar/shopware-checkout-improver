@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Free Shipping Progress Bar</title>
+        <title lang="de-DE">Fortschrittsbalken für kostenlosen Versand</title>
+
+        <input-field type="bool">
+            <name>showProgressBarInOffCanvasCart</name>
+            <label>Show in off-canvas cart</label>
+            <label lang="de-DE">Im Off-Canvas-Warenkorb anzeigen</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>showProgressBarInCart</name>
+            <label>Show in shopping cart</label>
+            <label lang="de-DE">Im Warenkorb anzeigen</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="colorpicker">
+            <name>progressBarBackgroundColor</name>
+            <label>Background color</label>
+            <label lang="de-DE">Hintergrundfarbe</label>
+            <css>checkout-improver-progress-bg</css>
+            <defaultValue>#f0f0f0</defaultValue>
+            <placeholder>#f0f0f0</placeholder>
+        </input-field>
+
+        <input-field type="colorpicker">
+            <name>progressBarFillColor</name>
+            <label>Progress fill color</label>
+            <label lang="de-DE">Füllfarbe des Fortschritts</label>
+            <css>checkout-improver-progress-fill</css>
+            <defaultValue>#10b981</defaultValue>
+            <placeholder>#10b981</placeholder>
+        </input-field>
+
+        <input-field type="colorpicker">
+            <name>progressBarSuccessColor</name>
+            <label>Success color</label>
+            <label lang="de-DE">Erfolgfarbe</label>
+            <css>checkout-improver-progress-success</css>
+            <defaultValue>#059669</defaultValue>
+            <placeholder>#059669</placeholder>
+        </input-field>
+
+        <input-field type="number" min="0" max="50">
+            <name>progressBarBorderRadius</name>
+            <label>Border radius (px)</label>
+            <label lang="de-DE">Eckenradius (px)</label>
+            <css>checkout-improver-progress-radius</css>
+            <defaultValue>8</defaultValue>
+            <helpText>Set to 0 for a sharp look, higher values for rounded corners</helpText>
+            <helpText lang="de-DE">0 für scharfe Kanten, höhere Werte für abgerundete Ecken</helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>showProgressBarAnimation</name>
+            <label>Show animated stripes</label>
+            <label lang="de-DE">Animierte Streifen anzeigen</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="select">
+            <name>progressBarIcon</name>
+            <label>Icon</label>
+            <label lang="de-DE">Icon</label>
+            <defaultValue>truck</defaultValue>
+            <options>
+                <option value="truck">Truck</option>
+                <option value="rocket">Rocket</option>
+                <option value="gift">Gift</option>
+                <option value="star">Star</option>
+                <option value="none">None</option>
+            </options>
+        </input-field>
+
+        <component name="sw-snippet-field">
+            <name>hiddenHeadlineSnippet</name>
+            <label>Hidden headline (accessibility)</label>
+            <label lang="de-DE">Versteckte Überschrift (Barrierefreiheit)</label>
+            <snippet>checkout.improver.freeShipping.headline</snippet>
+            <helpText>Click on the globe to edit the translation</helpText>
+            <helpText lang="de-DE">Klicke auf den Globus, um die Übersetzung zu bearbeiten</helpText>
+        </component>
+
+        <component name="sw-snippet-field">
+            <name>textUntilReachedSnippet</name>
+            <label>Text until free shipping is reached</label>
+            <label lang="de-DE">Text bis zum Erreichen des kostenlosen Versands</label>
+            <snippet>checkout.improver.freeShipping.textUntilIsReached</snippet>
+            <helpText>Use %priceDifference% as placeholder for the remaining amount</helpText>
+            <helpText lang="de-DE">Verwende %priceDifference% als Platzhalter für den Restbetrag</helpText>
+        </component>
+
+        <input-field type="bool">
+            <name>showSuccessMessage</name>
+            <label>Show success message</label>
+            <label lang="de-DE">Erfolgsmeldung anzeigen</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <component name="sw-snippet-field">
+            <name>textWhenReachedSnippet</name>
+            <label>Text when free shipping is reached</label>
+            <label lang="de-DE">Text beim Erreichen des kostenlosen Versands</label>
+            <snippet>checkout.improver.freeShipping.isReached</snippet>
+            <helpText>Click on the globe to edit the translation</helpText>
+            <helpText lang="de-DE">Klicke auf den Globus, um die Übersetzung zu bearbeiten</helpText>
+        </component>
+    </card>
+
+    <card>
+        <title>Voucher Code Field</title>
+        <title lang="de-DE">Eingabefeld für Gutschein-Code</title>
+
+        <input-field type="bool">
+            <name>showVoucherInOffCanvasCart</name>
+            <label>Show in off-canvas cart</label>
+            <label lang="de-DE">Im Off-Canvas-Warenkorb anzeigen</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>showVoucherInCart</name>
+            <label>Show in shopping cart</label>
+            <label lang="de-DE">Im Warenkorb anzeigen</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Product Number Field</title>
+        <title lang="de-DE">Eingabefeld für Artikelnummer</title>
+
+        <input-field type="bool">
+            <name>showProductNumberInCart</name>
+            <label>Show in shopping cart</label>
+            <label lang="de-DE">Im Warenkorb anzeigen</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+    </card>
+</config>
