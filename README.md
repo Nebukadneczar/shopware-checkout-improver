@@ -8,6 +8,24 @@ Modernisiert den Checkout in Shopware 6 mit:
 - 🏷️ **Artikelnummern-Feld** ein-/ausblendbar (Warenkorb)
 - 🌍 **DE + EN Snippets** inklusive
 
+## Screenshots
+
+### Fortschrittsbalken im Warenkorb
+
+| Fortschritt | Erfolg |
+|:-----------:|:-------:|
+| ![Fortschrittsbalken](docs/screenshots/warenkorb-fortschrittsbalken.png) | ![Erfolgsmeldung](docs/screenshots/warenkorb-erfolgsmeldung.png) |
+
+### Off-Canvas-Warenkorb
+
+![Off-Canvas](docs/screenshots/offcanvas-fortschrittsbalken.png)
+
+### Konfiguration
+
+| Fortschrittsbalken | Gutschein & Artikelnummer |
+|:------------------:|:-------------------------:|
+| ![Konfiguration Balken](docs/screenshots/konfiguration-fortschrittsbalken.png) | ![Konfiguration Felder](docs/screenshots/konfiguration-gutschein-artikelnummer.png) |
+
 ## Voraussetzungen
 
 - Shopware 6.6.0 oder höher
